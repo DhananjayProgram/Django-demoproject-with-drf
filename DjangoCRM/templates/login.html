@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Login User {% endblock %}
+
+
+{% block body %}
+<div class="userAuthform">
+    <div class="leftside">
+        <img src="{% static 'image/banner.jpg' %}" alt="" srcset="" class="leftimg">
+    </div>
+    <div class="rightside">
+        <h1>Autosys</h1>
+        <p style="padding: 10px 50px; font-size: 40px; font-weight: bold;">Welcome to Autosys CRM </p></br>
+        <p style="padding: 10px 50px;">
+            Please sign-in to your account and start the adventure</p>
+        <form class="userform" method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="">
+            </div>
+
+            <div class="input-group">
+                <label for="Password">Password</label>
+                <input type="password" name="password" id="">
+            </div>
+
+            <div class="input-group">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                </ul>
+                {% endif %}
+                <button type="submit" value="login" class="submitButton">Login</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+{% endblock %}

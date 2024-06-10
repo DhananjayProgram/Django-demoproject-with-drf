@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Register User {% endblock %}
+{% block body %}
+
+<div class="userAuthform">
+    <div class="leftside">
+        <img src="{% static 'image/banner.jpg' %}" alt="" srcset="" class="leftimg">
+    </div>
+    <div class="rightside">
+        <h1>Register User</h1>
+        <form class="userform" method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="firstname">First Name</label>
+                <input type="text" name="firstname" id="">
+            </div>
+            <div class="input-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" name="lastname" id="">
+            </div>
+            <div class="input-group">
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="">
+            </div>
+            <div class="input-group">
+                <label for="team">Team</label>
+                <select name="teamdropdown">
+                    <option value="0" selected="selected">Select Team:</option>
+                    <option value="Software">Software Team</option>
+                    <option value="Hardware">Hardware Team</option>
+                    <option value="Operation">Operation Team</option>
+                </select>
+
+            </div>
+            <div class="input-group">
+                <label for="Password">Password</label>
+                <input type="password" name="password" id="">
+            </div>
+            <div class="input-group">
+                <label for="Confirm Password">Confirm Password</label>
+                <input type="password" name="confirmpassword" id="">
+            </div>
+            <div class="input-group">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                </ul>
+                {% endif %}
+                <button type="submit" value="Register" class="submitButton">Register</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

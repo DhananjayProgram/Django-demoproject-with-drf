@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} User Task {% endblock %}
+{% block body %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'css/taskstyle.css'  %}">
+
+<section>
+    <nav>
+        <div class="main">
+
+            {% if user.is_authenticated %}
+            {% if user.image %}
+            <!-- <div class="profilepic"> -->
+            <img src="{{user.user_profile_image.url}}" alt="" srcset="" class="profilepic">
+            <!-- </div> -->
+            {% endif %}
+
+            <h1>{{ user.first_name |title}} {{user.last_name|title}}</h1>
+            <p>{{user.team_name | title}}</p>
+            {% endif %}
+            <hr style="background-color: #F8F8F8;height: 1px; width: 100%;margin: 10px 0;">
+            </hr>
+            <div class="navlink" id="home" onclick="">
+                <div class="icons"><i class="fa fa-home" aria-hidden="true"></i></div>
+                <li><a href="#">Home</a></li>
+            </div>
+            <div class="navlink" id="newtask" onclick="">
+                <div class="icons"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                <li><a href="#">New Task</a></li>
+            </div>
+            <div class="navlink" id="TaskStatus">
+                <div class="icons"><i class="fa fa-tasks" aria-hidden="true"></i></div>
+                <li><a href="#">Task Status</a></li>
+            </div>
+            <div class="navlink" id="profile">
+                <div class="icons"><i class="fa fa-user" aria-hidden="true"></i></div>
+                <li><a href="#">Profile</a></li>
+            </div>
+            <div class="navlink">
+                <div class="icons"><i class="fa fa-sign-out" aria-hidden="true"></i></div>
+                <li><a href="{% url 'logout' %}">LogOut</a></li>
+            </div>
+    </nav>
+    <div class="ridesidenav">
+        <div id="home-card">Home</div>
+        <div id="home-new-task" style="display: none;">New Task</div>
+        <!-- <div id="home-Task-Status" style="display: none;">Task Status</div> -->
+        <div id="home-Task-Status" style="display: none;">
+            <table>
+                <tr>
+                    <th>Book Title</th>
+                    <th>Book storyline </th>
+                    <!-- <th>Country</th> -->
+                </tr>
+                {% for book in data %}
+                <tr>
+                    <td>{{book.title}}</td>
+                    <td>{{book.storyline}}</td>
+                    <!-- <td>{{book.country}}</td> -->
+                </tr>
+
+                {% endfor %}
+            </table>
+        </div>
+        <div id="profile-Status" style="display: none;">profile Status</div>
+
+    </div>
+
+
+</section>
+<script>
+    $("#home").click(function () {
+        $("#home-card").css("display", "block");
+        $("#home-new-task").css("display", "none");
+        $("#home-Task-Status").css("display", "none");
+        $("#profile-Status").css("display", "none");
+    });
+    $("#newtask").click(function () {
+        $("#home-card").css("display", "none");
+        $("#home-new-task").css("display", "block");
+        $("#home-Task-Status").css("display", "none");
+        $("#profile-Status").css("display", "none");
+    });
+    $("#TaskStatus").click(function () {
+        $("#home-card").css("display", "none");
+        $("#home-new-task").css("display", "none");
+        $("#home-Task-Status").css("display", "block");
+        $("#profile-Status").css("display", "none");
+    });
+    $("#profile").click(function () {
+        $("#home-card").css("display", "none");
+        $("#home-new-task").css("display", "none");
+        $("#home-Task-Status").css("display", "none");
+        $("#profile-Status").css("display", "block");
+    });
+
+</script>
+
+{% endblock %}
